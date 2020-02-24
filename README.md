@@ -14,7 +14,15 @@ The sudoku program utilizes object-oriented programing principles and data struc
 ### Library:
 - Tkinter
 
+## Installation
+```
+git clone https://github.com/robertpzhang/sudoku_game
+cd sudoku_game
+python main.py
+```
+
 ## Functionalities
 
 - Generate a newly random Sudoku game
 - Solve and validate a solution based on trial and error algorithm
+
