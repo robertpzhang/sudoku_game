@@ -43,7 +43,7 @@ class sudoku_gui(Frame):
         check_answer = Button(self, text="Check Answer", command=self.__check_answers)
         check_answer.pack(fill=BOTH, side=BOTTOM)
 
-        new_game = Button(self, text="New Game", command=self.__new_game())
+        new_game = Button(self, text="New Game", command=self.__new_game)
         new_game.pack(fill=BOTH, side=BOTTOM)
 
         self.__draw_grid()
@@ -136,4 +136,5 @@ class sudoku_gui(Frame):
     def __new_game(self):
         # Initiates a new sudoku game
         self.game = sudoku_board()
+        # self.__initUI()
         self.__draw_puzzle()
