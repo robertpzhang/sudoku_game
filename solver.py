@@ -5,11 +5,18 @@ Author: Robert Zhang
 02/22/2020
 """
 import copy
+import random
+
 
 class sudoku_board():
-    def __init__(self, board):
-        self.board = board
-        self.start_board = copy.deepcopy(board)
+    def __init__(self):
+        self.board = [[0 for x in range(9)] for y in range(9)]
+        self.generate_random()
+        self.start_board = copy.deepcopy(self.board)
+
+    # def __init__(self, board):
+    #     self.board = board
+    #     self.start_board = copy.deepcopy(board)
 
     def reset(self):
         self.board = copy.deepcopy(self.start_board)
@@ -33,6 +40,26 @@ class sudoku_board():
             return True
 
         for i in range(1, 10):
+            self.board[row][col] = i
+            if not self.valid():
+                self.board[row][col] = 0
+                continue
+            if self.solve_sudoku():
+                return True
+            else:
+                self.board[row][col] = 0
+
+        return False
+
+    def ran_gen(self):
+        # index count for the current filler
+        [row, col] = self.find_empty()
+        if row == -1 and col == -1:
+            # Sudoku is solved
+            return True
+        x = [i for i in range(9)]
+        random.shuffle(x)
+        for i in x:
             self.board[row][col] = i
             if not self.valid():
                 self.board[row][col] = 0
@@ -111,3 +138,19 @@ class sudoku_board():
 
         """
         return self.grid_valid() and self.row_valid() and self.col_valid()
+
+    def generate_random(self):
+        """
+        The method generates a random sudoku game that is solvable
+
+        :return: a randomly generated 2D matrix of sudoku game
+        """
+        # generates a random value 1-9
+        self.ran_gen()
+        for i in range(56):
+            row = random.randint(0, 8)
+            col = random.randint(0, 8)
+            while self.board[row][col] == 0:
+                row = random.randint(0, 8)
+                col = random.randint(0, 8)
+            self.board[row][col] = 0

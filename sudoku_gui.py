@@ -4,6 +4,7 @@ The sudoku GUI class
 """
 from tkinter import *
 from tkinter import Tk, Canvas, Frame, Button, BOTH, TOP, BOTTOM
+from solver import sudoku_board
 
 MARGIN = 20  # margin of the board
 SIDE = 50  # each cell side length
@@ -41,6 +42,9 @@ class sudoku_gui(Frame):
 
         check_answer = Button(self, text="Check Answer", command=self.__check_answers)
         check_answer.pack(fill=BOTH, side=BOTTOM)
+
+        new_game = Button(self, text="New Game", command=self.__new_game())
+        new_game.pack(fill=BOTH, side=BOTTOM)
 
         self.__draw_grid()
         self.__draw_puzzle()
@@ -128,3 +132,8 @@ class sudoku_gui(Frame):
         if self.row >= 0 and self.col >= 0 and key in "123456789":
             self.game.board[self.row][self.col] = int(key)
             self.__draw_puzzle()
+
+    def __new_game(self):
+        # Initiates a new sudoku game
+        self.game = sudoku_board()
+        self.__draw_puzzle()
