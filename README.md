@@ -6,7 +6,7 @@ Date: 02/22/2020
 The sudoku program randomly initializes a random sudoku game that is 100% solvable, displays a GUI interface for the user to solve the sudoku game. If the user cannot solve the sudoku, the user can call the solver helper to help solve the sudoku.
 
 The sudoku program utilizes object-oriented programing principles and data structure & algorithms for implementation of the solver and generator methods.
-![Simple Sudoku GUI demo](gui_demo.png)
+![Simple Sudoku GUI demo](gui_demo.png = 250x250)
 
 
 ## Prerequisite
