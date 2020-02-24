@@ -1,6 +1,8 @@
 """
 The sudoku GUI class
 
+Author: Robert Zhang
+02/23/2020
 """
 from tkinter import *
 from tkinter import Tk, Canvas, Frame, Button, BOTH, TOP, BOTTOM
@@ -20,6 +22,12 @@ class sudoku_gui(Frame):
 
     """
     def __init__(self, parent, game):
+        """
+        Constructor class of sudoku GUI
+
+        :param parent: The super class, Tkinter frame
+        :param game: the game class with the sudoku board
+        """
         self.game = game
         self.board = game.board
         self.parent = parent
@@ -28,6 +36,11 @@ class sudoku_gui(Frame):
         self.__initUI()
 
     def __initUI(self):
+        """
+        Initialize the GUI helper function
+
+        :return:
+        """
         self.parent.title("Sudoku")
         self.pack(fill=BOTH, expand=1)
         self.canvas = Canvas(self, width=WIDTH, heigh=HEIGHT)
@@ -53,6 +66,11 @@ class sudoku_gui(Frame):
         self.canvas.bind("<Key>", self.__key_pressed)
 
     def __draw_grid(self):
+        """
+        Draws the grid of the GUI
+
+        :return:
+        """
         for i in range(10):
             color = "black" if i % 3 == 0 else "lightgray"
             x0 = MARGIN + i * SIDE
@@ -68,16 +86,52 @@ class sudoku_gui(Frame):
             self.canvas.create_line(x0, y0, x1, y1, fill=color)
 
     def __solve_answers(self):
+        """
+        Solve the answer calls the board GUI to solve and print out the solution
+
+        :return:
+        """
         self.__clear_answers()
+        # self.solve_helper()
         self.game.solve_sudoku()
         self.__draw_puzzle()
 
+    # def solve_helper(self):
+    #     [row, col] = self.game.find_empty()
+    #     if row == -1 and col == -1:
+    #         # Sudoku is solved
+    #         return True
+    #
+    #     for i in range(1, 10):
+    #         self.game.board[row][col] = i
+    #         self.__draw_puzzle()
+    #         if not self.game.valid():
+    #             self.game.board[row][col] = 0
+    #             self.__draw_puzzle()
+    #             continue
+    #         if self.solve_helper():
+    #             return True
+    #         else:
+    #             self.game.board[row][col] = 0
+    #             self.__draw_puzzle()
+    #     return False
+
     def __clear_answers(self):
+        """
+        Clear the answer function
+
+        :return:
+        """
         self.game.reset()
         # self.canvas.delete("victory")
         self.__draw_puzzle()
 
     def __draw_puzzle(self):
+        """
+        Draw puzzle method draws a new puzzle
+
+        :return:
+        """
         self.canvas.delete("numbers")
         for i in range(9):
             for j in range(9):
@@ -90,6 +144,11 @@ class sudoku_gui(Frame):
                     )
 
     def __check_answers(self):
+        """
+        Check the answers
+
+        :return:
+        """
         window = Tk()
         window.title("Results")
         if self.game.find_empty() == [-1, -1] and self.game.valid():
@@ -104,6 +163,12 @@ class sudoku_gui(Frame):
             window.mainloop()
 
     def __cell_clicked(self, event):
+        """
+        The cell clicked finds the index of the row, col of where it's clicked
+
+        :param event: the event clicker location
+        :return:
+        """
         x, y = event.x, event.y
 
         if MARGIN < x < WIDTH - MARGIN and MARGIN < y < HEIGHT - MARGIN:
@@ -128,12 +193,22 @@ class sudoku_gui(Frame):
             )
 
     def __key_pressed(self, event):
+        """
+        The key pressed function registers the value of the key
+
+        :param event: the event of key pressed event
+        :return:
+        """
         key = event.char
         if self.row >= 0 and self.col >= 0 and key in "123456789":
             self.game.board[self.row][self.col] = int(key)
             self.__draw_puzzle()
 
     def __new_game(self):
+        """
+        Generates a random new game for the GUI
+        :return:
+        """
         # Initiates a new sudoku game
         self.game = sudoku_board()
         # self.__initUI()

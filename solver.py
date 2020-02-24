@@ -9,19 +9,29 @@ import random
 
 
 class sudoku_board():
+    """
+    The sudoku class board that has functioanlities of solve, valid and a board (2D matrix)
+    """
     def __init__(self):
+        """
+        Constructor method that randonly generates a 2D board game of sudoku
+        """
         self.board = [[0 for x in range(9)] for y in range(9)]
         self.generate_random()
         self.start_board = copy.deepcopy(self.board)
 
-    # def __init__(self, board):
-    #     self.board = board
-    #     self.start_board = copy.deepcopy(board)
-
     def reset(self):
+        """
+        Reset method resets the current (insolving) to the original generated board
+        :return: sets the original board
+        """
         self.board = copy.deepcopy(self.start_board)
 
     def find_empty(self):
+        """
+        Find the first empty index
+        :return: [row col] index of the first 0 in the board
+        """
         row = len(self.board)
         col = len(self.board[0])
         for i in range(row):
@@ -33,6 +43,10 @@ class sudoku_board():
         return [-1, -1]
 
     def solve_sudoku(self):
+        """
+        The solve sudoku method solves the sudoku game
+        :return: True if the solve is success, false if not
+        """
         # index count for the current filler
         [row, col] = self.find_empty()
         if row == -1 and col == -1:
@@ -48,10 +62,13 @@ class sudoku_board():
                 return True
             else:
                 self.board[row][col] = 0
-
         return False
 
     def ran_gen(self):
+        """
+        Utilizes a random algorithm to generate a random 2D matrix of board game
+        :return: True or False
+        """
         # index count for the current filler
         [row, col] = self.find_empty()
         if row == -1 and col == -1:
