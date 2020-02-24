@@ -12,10 +12,6 @@ import tkinter
 from sudoku_gui import sudoku_gui
 
 if __name__ == "__main__":
-    game = 3;
-    window = tkinter.Tk()
-    sudoku_gui(window, game)
-    window.mainloop()
 
     # creating a 2D array for the grid
     grid =[[0 for x in range(9) ]for y in range(9)]
@@ -33,19 +29,18 @@ if __name__ == "__main__":
 
     game = sudoku_board(grid)
 
-    start = time.perf_counter()
-    print(game.valid())
-    if game.solve_sudoku():
-        print("valid solution")
-        print(np.array(grid))
-    else:
-        print(grid)
-        print("Invalid board! No solution")
+    window = tkinter.Tk()
+    sudoku_gui(window, game)
+    window.mainloop()
 
-    t = time.perf_counter() - start
-    print(t)
-    # if success print the grid
-    # if(solve_sudoku(grid)):
-    #     print_grid(grid)
+    # start = time.perf_counter()
+    # print(game.valid())
+    # if game.solve_sudoku():
+    #     print("valid solution")
+    #     print(np.array(grid))
     # else:
-    #     print "No solution exists"
+    #     print(grid)
+    #     print("Invalid board! No solution")
+    #
+    # t = time.perf_counter() - start
+    # print(t)

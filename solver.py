@@ -4,11 +4,15 @@ The solver python file contains the sudoku board game class
 Author: Robert Zhang
 02/22/2020
 """
-
+import copy
 
 class sudoku_board():
     def __init__(self, board):
         self.board = board
+        self.start_board = copy.deepcopy(board)
+
+    def reset(self):
+        self.board = copy.deepcopy(self.start_board)
 
     def find_empty(self):
         row = len(self.board)
