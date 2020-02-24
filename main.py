@@ -6,8 +6,6 @@ Author: Robert Zhang
 """
 
 from solver import sudoku_board
-import numpy as np
-import time, random
 import tkinter
 from sudoku_gui import sudoku_gui
 

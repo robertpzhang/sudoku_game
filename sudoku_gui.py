@@ -7,7 +7,6 @@ Author: Robert Zhang
 from tkinter import *
 from tkinter import Tk, Canvas, Frame, Button, BOTH, TOP, BOTTOM
 from solver import sudoku_board
-from time import sleep
 
 MARGIN = 20  # margin of the board
 SIDE = 50  # each cell side length
