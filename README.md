@@ -1,5 +1,6 @@
 # sudoku_game
-Author:Robert Zhang 
+Author: Robert Zhang 
+
 Date: 02/22/2020 
 
 The sudoku program randomly initializes a random sudoku game that is 100% solvable, displays a GUI interface for the user to solve the sudoku game. If the user cannot solve the sudoku, the user can call the solver helper to help solve the sudoku.
