@@ -6,7 +6,7 @@ The sudoku program randomly initializes a sudoku game that is 100% solvable, dis
 ## Prerequisite
 ### Tools:
 - Python 3
-### Librarys:
+### Library:
 - Tkinter
 
 ## Functionalities
