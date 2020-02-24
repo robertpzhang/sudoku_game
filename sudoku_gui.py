@@ -7,6 +7,7 @@ Author: Robert Zhang
 from tkinter import *
 from tkinter import Tk, Canvas, Frame, Button, BOTH, TOP, BOTTOM
 from solver import sudoku_board
+from time import sleep
 
 MARGIN = 20  # margin of the board
 SIDE = 50  # each cell side length
@@ -92,29 +93,35 @@ class sudoku_gui(Frame):
         :return:
         """
         self.__clear_answers()
-        # self.solve_helper()
-        self.game.solve_sudoku()
-        self.__draw_puzzle()
+        self.solve_helper()
+        # self.game.solve_sudoku()
+        # self.__draw_puzzle()
 
-    # def solve_helper(self):
-    #     [row, col] = self.game.find_empty()
-    #     if row == -1 and col == -1:
-    #         # Sudoku is solved
-    #         return True
-    #
-    #     for i in range(1, 10):
-    #         self.game.board[row][col] = i
-    #         self.__draw_puzzle()
-    #         if not self.game.valid():
-    #             self.game.board[row][col] = 0
-    #             self.__draw_puzzle()
-    #             continue
-    #         if self.solve_helper():
-    #             return True
-    #         else:
-    #             self.game.board[row][col] = 0
-    #             self.__draw_puzzle()
-    #     return False
+    def solve_helper(self):
+        [row, col] = self.game.find_empty()
+        if row == -1 and col == -1:
+            # Sudoku is solved
+            return True
+
+        for i in range(1, 10):
+            # sleep(0.5)
+            self.game.board[row][col] = i
+            self.__draw_puzzle()
+            self.canvas.update()
+            if not self.game.valid():
+                self.game.board[row][col] = 0
+                self.__draw_puzzle()
+                self.canvas.update()
+                continue
+            if self.solve_helper():
+                return True
+            else:
+                self.game.board[row][col] = 0
+                self.__draw_puzzle()
+                self.canvas.update()
+        return False
+
+
 
     def __clear_answers(self):
         """
