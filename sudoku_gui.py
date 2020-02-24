@@ -23,7 +23,7 @@ class sudoku_gui(Frame):
         self.board = game.board
         self.parent = parent
         Frame.__init__(self, parent)
-        self.row, self.col = 0, 0
+        self.row, self.col = -1, -1
         self.__initUI()
 
     def __initUI(self):
@@ -91,23 +91,40 @@ class sudoku_gui(Frame):
         if self.game.find_empty() == [-1, -1] and self.game.valid():
             lbl = Label(window, text="Congrats! You solved the sudoku! :)))")
             lbl.grid(column=30, row=0)
-            window.geometry('300x80')
+            window.geometry('400x80')
             window.mainloop()
         else:
             lbl = Label(window, text="Wrong Solution! Keep trying! :')")
             lbl.grid(column=30, row=0)
-            window.geometry('300x80')
+            window.geometry('400x80')
             window.mainloop()
 
     def __cell_clicked(self, event):
         x, y = event.x, event.y
+
         if MARGIN < x < WIDTH - MARGIN and MARGIN < y < HEIGHT - MARGIN:
             self.canvas.focus_set()
+            row, col = (y - MARGIN) // SIDE, (x - MARGIN) // SIDE
+            if row == self.row and col == self.col:
+                # The current box is selected
+                self.row, self.col = -1, -1
+            elif self.game.start_board[row][col] == 0:
+                self.row, self.col = row, col
+        # delete previous click
+        self.canvas.delete("cursor")
 
-
+        if self.row >= 0 and self.col >= 0:
+            x0 = MARGIN + self.col * SIDE + 1
+            y0 = MARGIN + self.row * SIDE + 1
+            x1 = MARGIN + (self.col + 1) * SIDE - 1
+            y1 = MARGIN + (self.row + 1) * SIDE - 1
+            self.canvas.create_rectangle(
+                x0, y0, x1, y1,
+                outline="purple1", tags="cursor"
+            )
 
     def __key_pressed(self, event):
-        x, y = event.x, event.y
-
-        return 1
-
+        key = event.char
+        if self.row >= 0 and self.col >= 0 and key in "123456789":
+            self.game.board[self.row][self.col] = int(key)
+            self.__draw_puzzle()

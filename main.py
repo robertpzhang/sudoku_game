@@ -32,15 +32,3 @@ if __name__ == "__main__":
     window = tkinter.Tk()
     sudoku_gui(window, game)
     window.mainloop()
-
-    # start = time.perf_counter()
-    # print(game.valid())
-    # if game.solve_sudoku():
-    #     print("valid solution")
-    #     print(np.array(grid))
-    # else:
-    #     print(grid)
-    #     print("Invalid board! No solution")
-    #
-    # t = time.perf_counter() - start
-    # print(t)

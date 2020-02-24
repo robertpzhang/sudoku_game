@@ -53,16 +53,14 @@ class sudoku_board():
         :return: true or false if the rows are valid
 
         """
-        row = len(self.board)
-        col = len(self.board[0])
-        for i in range(row):
+        for i in range(9):
             hash_set = set()
-            for j in range(col):
+            for j in range(9):
                 if self.board[i][j] != 0 and self.board[i][j] in hash_set:
                     return False
                 else:
                     hash_set.add(self.board[i][j])
-            # hash_set.clear()
+            hash_set.clear()
         return True
 
     def col_valid(self):
@@ -73,11 +71,9 @@ class sudoku_board():
         :return: True or false if the cols are valid
         """
 
-        row = len(self.board)
-        col = len(self.board[0])
-        for j in range(col):
+        for j in range(9):
             hash_set = set()
-            for i in range(row):
+            for i in range(9):
                 if self.board[i][j] != 0 and self.board[i][j] in hash_set:
                     return False
                 else:
@@ -115,4 +111,3 @@ class sudoku_board():
 
         """
         return self.grid_valid() and self.row_valid() and self.col_valid()
-
