@@ -7,7 +7,7 @@ The sudoku program randomly initializes a random sudoku game that is 100% solvab
 
 The sudoku program utilizes object-oriented programing principles and data structure & algorithms for implementation of the solver and generator methods.
 
-<img src="gui_demo.png" width="400" height="500">
+<img src="gui_demo.gif" width="400" height="500">
 
 ## Prerequisite
 ### Tools:
