@@ -5,15 +5,17 @@ Author: Robert Zhang
 02/22/2020
 """
 
-from validation import valid
-from solver import solve_sudoku
+from solver import sudoku_board
 import numpy as np
 import time, random
 import tkinter
+from sudoku_gui import sudoku_gui
 
 if __name__ == "__main__":
+    game = 3;
     window = tkinter.Tk()
-    window.title("Sudoku")
+    sudoku_gui(window, game)
+    window.mainloop()
 
     # creating a 2D array for the grid
     grid =[[0 for x in range(9) ]for y in range(9)]
@@ -29,9 +31,11 @@ if __name__ == "__main__":
           [0,0,0,0,0,0,0,7,4],
           [0,0,5,2,0,6,3,0,0]]
 
+    game = sudoku_board(grid)
+
     start = time.perf_counter()
-    print(valid(grid))
-    if solve_sudoku(grid):
+    print(game.valid())
+    if game.solve_sudoku():
         print("valid solution")
         print(np.array(grid))
     else:
