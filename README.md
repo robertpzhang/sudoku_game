@@ -25,5 +25,13 @@ python main.py
 ## Functionalities
 
 - Generate a newly random Sudoku game
+  - The generator algorithm starts the grid with a blank 9x9 matrix
+  - The generator generated a random set of numbers to fill in
+  - The generator utilizes the trial and error backtrack to try to solve the blank matrix
+  - The generator then removes 55 slots in the matrix
+  
 - Solve and validate a solution based on trial and error and backtracking algorithm
-
+  - The solver finds the first empty slot in the matrix
+  - The solver fills in numbers starting from 1 - 9
+  - The solver validates if the number made the matrix valid 
+  - If valid, the solver goes to the next empty slot; if not valid, the solver backtracks to the last slot.
