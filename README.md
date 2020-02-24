@@ -24,5 +24,5 @@ python main.py
 ## Functionalities
 
 - Generate a newly random Sudoku game
-- Solve and validate a solution based on trial and error algorithm
+- Solve and validate a solution based on trial and error and backtracking algorithm
 
